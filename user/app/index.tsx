@@ -213,5 +213,10 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
 
+  categoryText: {
+    color: '#FFF',
+    fontWeight: '600',
+  },
+
   );
 }
