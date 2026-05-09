@@ -164,5 +164,10 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
 
+  bannerImage: {
+    width: '100%',
+    height: 220,
+  },
+
   );
 }
