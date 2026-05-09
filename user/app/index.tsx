@@ -38,5 +38,10 @@ export default function HomePage() {
       {/* HEADER */}
       <View style={styles.header}>
         <Text style={styles.logo}>GoTour</Text>
+
+        <Text style={styles.subtitle}>
+          Explore Wisata Favoritmu
+        </Text>
+      </View>
   );
 }
