@@ -76,5 +76,21 @@ export default function HomePage() {
           Kategori
         </Text>
 
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {['Pantai', 'Gunung', 'Pulau', 'Camping'].map(
+            (item, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.categoryButton}
+              >
+                <Text style={styles.categoryText}>
+                  {item}
+                </Text>
+              </TouchableOpacity>
+            ),
+          )}
+        </ScrollView>
+      </View>
+
   );
 }
