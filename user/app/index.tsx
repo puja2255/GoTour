@@ -143,5 +143,11 @@ const styles = StyleSheet.create({
     color: '#1E88E5',
   },
 
+  subtitle: {
+    marginTop: 5,
+    color: '#666',
+    fontSize: 16,
+  },
+
   );
 }
