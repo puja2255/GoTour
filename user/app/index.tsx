@@ -149,5 +149,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
+  search: {
+    backgroundColor: '#FFF',
+    marginHorizontal: 20,
+    padding: 15,
+    borderRadius: 12,
+    marginBottom: 20,
+  },
+
   );
 }
