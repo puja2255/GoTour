@@ -115,5 +115,16 @@ export default function HomePage() {
                 {item.name}
               </Text>
 
+              <Text style={styles.cardLocation}>
+                📍 {item.location}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </ScrollView>
+  );
+}
+
   );
 }
