@@ -175,5 +175,12 @@ const styles = StyleSheet.create({
     left: 20,
   },
 
+   bannerTitle: {
+    color: '#FFF',
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+
   );
 }
