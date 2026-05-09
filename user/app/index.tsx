@@ -244,5 +244,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  );
-}
+  cardLocation: {
+    marginTop: 5,
+    color: '#666',
+  },
+});
