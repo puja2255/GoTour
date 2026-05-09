@@ -43,5 +43,11 @@ export default function HomePage() {
           Explore Wisata Favoritmu
         </Text>
       </View>
+
+       {/* SEARCH */}
+      <TextInput
+        placeholder="Cari destinasi..."
+        style={styles.search}
+      />
   );
 }
