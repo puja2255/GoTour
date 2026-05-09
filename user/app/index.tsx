@@ -218,5 +218,10 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 
+  destinationContainer: {
+    paddingHorizontal: 20,
+    marginBottom: 30,
+  },
+
   );
 }
