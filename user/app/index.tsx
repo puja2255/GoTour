@@ -137,5 +137,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 
+  logo: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#1E88E5',
+  },
+
   );
 }
