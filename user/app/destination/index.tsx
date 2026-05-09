@@ -18,5 +18,25 @@ const DATA = [
 ];
 
 export default function DestinationPage() {
-    
+    return (
+    <View style={{ padding: 20 }}>
+      <FlatList
+        data={DATA}
+        keyExtractor={(item) =>
+          item.id.toString()
+        }
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() =>
+              router.push(
+                `/destination/${item.id}`
+              )
+            }
+          >
+            <Text>{item.name}</Text>
+          </TouchableOpacity>
+        )}
+      />
+    </View>
+  );
 }
