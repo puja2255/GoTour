@@ -92,5 +92,11 @@ export default function HomePage() {
         </ScrollView>
       </View>
 
+       {/* POPULAR DESTINATION */}
+      <View style={styles.destinationContainer}>
+        <Text style={styles.sectionTitle}>
+          Destinasi Populer
+        </Text>
+
   );
 }
