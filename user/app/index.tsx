@@ -223,5 +223,12 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
 
+  card: {
+    backgroundColor: '#FFF',
+    borderRadius: 18,
+    overflow: 'hidden',
+    marginBottom: 20,
+  },
+
   );
 }
