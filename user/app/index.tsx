@@ -157,5 +157,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
+  banner: {
+    marginHorizontal: 20,
+    borderRadius: 20,
+    overflow: 'hidden',
+    marginBottom: 25,
+  },
+
   );
 }
