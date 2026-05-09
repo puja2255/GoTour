@@ -235,5 +235,9 @@ const styles = StyleSheet.create({
     height: 200,
   },
 
+   cardContent: {
+    padding: 15,
+  },
+
   );
 }
