@@ -49,5 +49,13 @@ export default function HomePage() {
         placeholder="Cari destinasi..."
         style={styles.search}
       />
+      {/* BANNER */}
+      <View style={styles.banner}>
+        <Image
+          source={{
+            uri: 'https://picsum.photos/800/400',
+          }}
+          style={styles.bannerImage}
+        />
   );
 }
