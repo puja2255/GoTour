@@ -205,5 +205,13 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
 
+  categoryButton: {
+    backgroundColor: '#1E88E5',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 20,
+    marginRight: 10,
+  },
+
   );
 }
