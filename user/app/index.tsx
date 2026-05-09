@@ -239,5 +239,10 @@ const styles = StyleSheet.create({
     padding: 15,
   },
 
+  cardTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+
   );
 }
