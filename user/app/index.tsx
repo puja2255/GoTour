@@ -199,5 +199,11 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
 
+  sectionTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 15,
+  },
+
   );
 }
