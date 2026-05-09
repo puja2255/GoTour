@@ -32,26 +32,11 @@ const destinations = [
   },
 ];
 
-import { router } from 'expo-router';
-
 export default function HomePage() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Text>GoTour</Text>
-
-      <TouchableOpacity
-        onPress={() =>
-          router.push('/destination')
-        }
-      >
-        <Text>Lihat Destinasi</Text>
-      </TouchableOpacity>
-    </View>
+    <ScrollView style={styles.container}>
+      {/* HEADER */}
+      <View style={styles.header}>
+        <Text style={styles.logo}>GoTour</Text>
   );
 }
