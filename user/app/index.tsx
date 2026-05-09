@@ -169,5 +169,11 @@ const styles = StyleSheet.create({
     height: 220,
   },
 
+   bannerOverlay: {
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
+  },
+
   );
 }
