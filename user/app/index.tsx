@@ -62,5 +62,14 @@ export default function HomePage() {
           <Text style={styles.bannerTitle}>
             Temukan Tempat Terbaik
           </Text>
+
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>
+              Jelajahi Sekarang
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
   );
 }
