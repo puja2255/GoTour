@@ -98,5 +98,17 @@ export default function HomePage() {
           Destinasi Populer
         </Text>
 
+         {destinations.map((item) => (
+          <TouchableOpacity
+            key={item.id}
+            style={styles.card}
+          >
+            <Image
+              source={{
+                uri: item.image,
+              }}
+              style={styles.cardImage}
+            />
+
   );
 }
