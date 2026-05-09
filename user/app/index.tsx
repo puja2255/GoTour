@@ -189,5 +189,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 
+  buttonText: {
+    color: '#FFF',
+    fontWeight: 'bold',
+  },
+
   );
 }
