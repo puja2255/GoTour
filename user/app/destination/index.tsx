@@ -16,3 +16,7 @@ const DATA = [
     name: 'Pahawang',
   },
 ];
+
+export default function DestinationPage() {
+    
+}
