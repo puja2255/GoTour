@@ -230,5 +230,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
+  cardImage: {
+    width: '100%',
+    height: 200,
+  },
+
   );
 }
