@@ -7,3 +7,9 @@ import {
 
 export default function DetailPage() {
   const { id } = useLocalSearchParams();
+ return (
+    <View style={{ padding: 20 }}>
+      <Text>Detail Wisata ID: {id}</Text>
+    </View>
+  );
+}
