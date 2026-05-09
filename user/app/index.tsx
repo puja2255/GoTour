@@ -110,5 +110,10 @@ export default function HomePage() {
               style={styles.cardImage}
             />
 
+             <View style={styles.cardContent}>
+              <Text style={styles.cardTitle}>
+                {item.name}
+              </Text>
+
   );
 }
