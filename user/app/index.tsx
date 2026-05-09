@@ -57,5 +57,10 @@ export default function HomePage() {
           }}
           style={styles.bannerImage}
         />
+
+        <View style={styles.bannerOverlay}>
+          <Text style={styles.bannerTitle}>
+            Temukan Tempat Terbaik
+          </Text>
   );
 }
