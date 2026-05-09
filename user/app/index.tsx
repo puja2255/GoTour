@@ -70,6 +70,11 @@ export default function HomePage() {
           </TouchableOpacity>
         </View>
       </View>
+       {/* CATEGORY */}
+      <View style={styles.categoryContainer}>
+        <Text style={styles.sectionTitle}>
+          Kategori
+        </Text>
 
   );
 }
