@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+export default function Places() {
+  return <h3>Halaman Kelola Places</h3>;
+}
 
 type Place = {
   id: number;
