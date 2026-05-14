@@ -6,7 +6,7 @@ type Place = {
   location: string;
 };
 
-export default function App() {
+export default function Places() {
   const [places, setPlaces] = useState<Place[]>([]);
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
@@ -53,23 +53,21 @@ export default function App() {
   };
 
   return (
-    <div style={{ padding: 30, fontFamily: "Arial" }}>
-      <h1>🌴 CMS Data Wisata</h1>
+    <div>
+      <h1>Kelola Tempat Wisata</h1>
 
       <div style={{ marginBottom: 20 }}>
         <input
           placeholder="Nama Tempat Wisata"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          style={{ marginRight: 10, padding: 8 }}
         />
         <input
           placeholder="Lokasi"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-          style={{ marginRight: 10, padding: 8 }}
         />
-        <button onClick={savePlace} style={{ padding: "8px 15px" }}>
+        <button onClick={savePlace}>
           {editId ? "Update" : "Tambah"}
         </button>
       </div>
@@ -89,7 +87,7 @@ export default function App() {
               <td>{p.location}</td>
               <td>
                 <button onClick={() => editPlace(p)}>Edit</button>
-                <button onClick={() => deletePlace(p.id)} style={{ marginLeft: 10 }}>
+                <button onClick={() => deletePlace(p.id)}>
                   Hapus
                 </button>
               </td>
