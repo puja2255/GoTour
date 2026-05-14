@@ -1,9 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminLayout from "./layouts/AdminLayout";
-import { Dashboard } from "./pages/Dashboard";
-import Places from "./pages/Places";
-import Events from "./pages/Events";
-
+import  Dashboard  from "./Pages/Dashboard";
+import Places from "./Pages/Places";
+import Events from "./Pages/Events";
 function App() {
   return (
     <BrowserRouter>
