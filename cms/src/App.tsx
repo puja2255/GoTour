@@ -54,7 +54,7 @@ export default function Places() {
 
   return (
     <div>
-      <h1>Kelola Tempat Wisata</h1>
+      <h1>Kelola Tempat Wisata Gotour</h1>
 
       <div style={{ marginBottom: 20 }}>
         <input
