@@ -1,8 +1,11 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminLayout from "./layouts/AdminLayout";
-import  Dashboard  from "./Pages/Dashboard";
+import Dashboard from "./Pages/Dashboard";
 import Places from "./Pages/Places";
 import Events from "./Pages/Events";
+import Users from "./Pages/Users";
+
 function App() {
   return (
     <BrowserRouter>
@@ -11,6 +14,7 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="places" element={<Places />} />
           <Route path="events" element={<Events />} />
+          <Route path="users" element={<Users />} />
         </Route>
       </Routes>
     </BrowserRouter>
