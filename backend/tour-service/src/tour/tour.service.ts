@@ -7,4 +7,8 @@ export class TourService {
     create(data) {
     return prisma.tour.create({ data });
   }
+
+  findAll() {
+    return prisma.tour.findMany({ include: { category: true } });
+  }
 }
