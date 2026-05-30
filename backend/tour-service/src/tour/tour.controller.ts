@@ -5,4 +5,9 @@ import { CreateTourDto } from './dto/create-tour.dto';
 @Controller('tour')
 export class TourController {
     constructor(private readonly service: TourService) {}
+
+     @Post()
+  create(@Body() dto: CreateTourDto) {
+    return this.service.create(dto);
+  }
 }
