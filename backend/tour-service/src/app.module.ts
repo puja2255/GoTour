@@ -5,7 +5,7 @@ import { TourModule } from './tour/tour.module';
 import { CategoryModule } from './category/category.module';
 
 @Module({
-  imports: [TourModule, CategoryModule, PrismaModule],
+  imports: [TourModule, CategoryModule],
   controllers: [AppController],
   providers: [AppService],
 })
