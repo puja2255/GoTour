@@ -5,10 +5,8 @@ const prisma = new PrismaClient();
 
 @Injectable()
 export class CategoryService {
-  constructor(private prisma: PrismaService) {}
-
   create(data: { name: string }) {
-    return this.prisma.category.create({
+    return prisma.category.create({
       data,
     });
   }
