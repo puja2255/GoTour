@@ -10,4 +10,9 @@ export class TourController {
   create(@Body() dto: CreateTourDto) {
     return this.service.create(dto);
   }
+
+  @Get()
+  findAll() {
+    return this.service.findAll();
+  }
 }
