@@ -10,4 +10,9 @@ export class CategoryController {
     return this.categoryService.findAll();
   }
 
+   @Post()
+  create(@Body() data: { name: string }) {
+    return this.categoryService.create(data);
+  }
+
 }
