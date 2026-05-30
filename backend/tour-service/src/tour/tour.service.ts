@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 @Injectable()
 export class TourService {
-    create(data) {
+  create(data) {
     return prisma.tour.create({ data });
   }
 
