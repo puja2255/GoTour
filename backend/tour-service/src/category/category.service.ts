@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -11,7 +11,7 @@ export class CategoryService {
     });
   }
 
-   findAll() {
+  findAll() {
     return prisma.category.findMany();
   }
 }
