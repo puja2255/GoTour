@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 type Place = {
   id: number;
@@ -10,7 +11,7 @@ type Place = {
   description: string;
 };
 
-const CATEGORIES = [
+const DEFAULT_CATEGORIES = [
   "Candi & Sejarah",
   "Pantai & Bahari",
   "Gunung & Alam",
@@ -47,6 +48,7 @@ const PRESETS = [
 
 export default function Places() {
   const [places, setPlaces] = useState<Place[]>([]);
+  const [dbCategories, setDbCategories] = useState<{ id: number; name: string }[]>([]);
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Semua");
 
@@ -55,28 +57,90 @@ export default function Places() {
   const [editId, setEditId] = useState<number | null>(null);
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
-  const [category, setCategory] = useState(CATEGORIES[0]);
+  const [category, setCategory] = useState(DEFAULT_CATEGORIES[0]);
   const [rating, setRating] = useState(5.0);
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
 
-  // Load places on mount
-  useEffect(() => {
-    const data = localStorage.getItem("places");
-    if (data) {
-      setPlaces(JSON.parse(data));
-    } else {
-      // Seed initial mock places with all advanced properties
-      const initial: Place[] = PRESETS.map((p, idx) => ({
-        id: idx + 1,
-        ...p,
-      }));
-      localStorage.setItem("places", JSON.stringify(initial));
-      setPlaces(initial);
+  const loadCategories = async () => {
+    try {
+      const res = await axios.get("/category");
+      let cats = res.data;
+      if (!cats || cats.length === 0) {
+        for (const catName of DEFAULT_CATEGORIES) {
+          await axios.post("/category", { name: catName });
+        }
+        const refetched = await axios.get("/category");
+        cats = refetched.data;
+      }
+      setDbCategories(cats);
+    } catch (e) {
+      console.error("Error loading categories from database", e);
+      setDbCategories(DEFAULT_CATEGORIES.map((name, i) => ({ id: i + 1, name })));
     }
+  };
+
+  const loadTours = async () => {
+    try {
+      const res = await axios.get("/tour");
+      const dbTours = res.data.map((t: any) => {
+        let desc = t.description;
+        let loc = "Indonesia";
+        let rat = 4.8;
+        try {
+          if (t.description.trim().startsWith("{")) {
+            const parsed = JSON.parse(t.description);
+            desc = parsed.description || t.description;
+            loc = parsed.location || "Indonesia";
+            rat = parsed.rating || 4.8;
+          }
+        } catch (e) {}
+
+        return {
+          id: t.id,
+          name: t.name,
+          location: loc,
+          category: t.category?.name || "Lain-lain",
+          rating: rat,
+          image: t.image,
+          description: desc
+        };
+      });
+
+      const localData = localStorage.getItem("places");
+      const localPlaces: Place[] = localData ? JSON.parse(localData) : [];
+      
+      const merged = [...dbTours];
+      for (const lp of localPlaces) {
+        if (!merged.some(mt => mt.name.toLowerCase() === lp.name.toLowerCase())) {
+          merged.push(lp);
+        }
+      }
+      setPlaces(merged);
+      localStorage.setItem("places", JSON.stringify(merged));
+    } catch (e) {
+      console.error("Error loading tours from database", e);
+      const data = localStorage.getItem("places");
+      if (data) {
+        setPlaces(JSON.parse(data));
+      } else {
+        const initial: Place[] = PRESETS.map((p, idx) => ({
+          id: idx + 1,
+          ...p,
+        }));
+        localStorage.setItem("places", JSON.stringify(initial));
+        setPlaces(initial);
+      }
+    }
+  };
+
+  // Load places and categories on mount
+  useEffect(() => {
+    loadCategories();
+    loadTours();
   }, []);
 
-  // Sync back to localStorage
+  // Sync back to localStorage for hybrid overrides
   const saveToLocalStorage = (updatedPlaces: Place[]) => {
     localStorage.setItem("places", JSON.stringify(updatedPlaces));
     setPlaces(updatedPlaces);
@@ -86,7 +150,7 @@ export default function Places() {
     setEditId(null);
     setName("");
     setLocation("");
-    setCategory(CATEGORIES[0]);
+    setCategory(DEFAULT_CATEGORIES[0]);
     setRating(5.0);
     setImage("");
     setDescription("");
@@ -111,7 +175,7 @@ export default function Places() {
     }
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !location) {
       alert("Mohon isi Nama Tempat dan Lokasi!");
@@ -121,7 +185,7 @@ export default function Places() {
     const fallbackImage = image.trim() || "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80";
 
     if (editId) {
-      // Edit
+      // Edit local override
       const updated = places.map((p) =>
         p.id === editId
           ? {
@@ -137,17 +201,40 @@ export default function Places() {
       );
       saveToLocalStorage(updated);
     } else {
-      // Add
-      const newPlace: Place = {
-        id: Date.now(),
-        name,
-        location,
-        category,
-        rating: Number(rating),
-        image: fallbackImage,
+      // Add to DB
+      let matchedCat = dbCategories.find(c => c.name.toLowerCase() === category.toLowerCase());
+      if (!matchedCat && dbCategories.length > 0) {
+        matchedCat = dbCategories[0];
+      }
+      const categoryId = matchedCat ? matchedCat.id : 1;
+
+      const serializedDescription = JSON.stringify({
         description,
-      };
-      saveToLocalStorage([...places, newPlace]);
+        location,
+        rating: Number(rating)
+      });
+
+      try {
+        await axios.post("/tour", {
+          name,
+          description: serializedDescription,
+          image: fallbackImage,
+          categoryId: categoryId
+        });
+        await loadTours();
+      } catch (err) {
+        console.error("Failed to post to backend, saving locally", err);
+        const newPlace: Place = {
+          id: Date.now(),
+          name,
+          location,
+          category,
+          rating: Number(rating),
+          image: fallbackImage,
+          description,
+        };
+        saveToLocalStorage([...places, newPlace]);
+      }
     }
     setShowModal(false);
   };
@@ -240,7 +327,7 @@ export default function Places() {
             style={{ width: "200px", height: "42px", fontSize: "0.9rem" }}
           >
             <option value="Semua">Semua Kategori</option>
-            {CATEGORIES.map((cat) => (
+            {DEFAULT_CATEGORIES.map((cat) => (
               <option key={cat} value={cat}>
                 {cat}
               </option>
@@ -472,7 +559,7 @@ export default function Places() {
                   <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
                     <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-muted)" }}>Kategori</label>
                     <select value={category} onChange={(e) => setCategory(e.target.value)}>
-                      {CATEGORIES.map((cat) => (
+                      {DEFAULT_CATEGORIES.map((cat) => (
                         <option key={cat} value={cat}>
                           {cat}
                         </option>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function Dashboard() {
   const [placesCount, setPlacesCount] = useState(0);
@@ -7,20 +8,25 @@ export default function Dashboard() {
   const [usersCount, setUsersCount] = useState(0);
 
   useEffect(() => {
-    // Read count from localStorage dynamically
-    const placesData = localStorage.getItem("places");
-    if (placesData) {
-      setPlacesCount(JSON.parse(placesData).length);
-    } else {
-      // Seed default
-      const defaultPlaces = [
-        { id: 1, name: "Candi Borobudur", location: "Magelang, Jawa Tengah" },
-        { id: 2, name: "Pantai Kuta", location: "Badung, Bali" },
-        { id: 3, name: "Gunung Bromo", location: "Probolinggo, Jawa Timur" },
-      ];
-      localStorage.setItem("places", JSON.stringify(defaultPlaces));
-      setPlacesCount(defaultPlaces.length);
-    }
+    // Load live places count from backend
+    const loadLivePlaces = async () => {
+      try {
+        const res = await axios.get("/tour");
+        if (res.data) {
+          setPlacesCount(res.data.length);
+        }
+      } catch (err) {
+        console.error("Failed to load live places count in dashboard, using cache", err);
+        const placesData = localStorage.getItem("places");
+        if (placesData) {
+          setPlacesCount(JSON.parse(placesData).length);
+        } else {
+          setPlacesCount(3);
+        }
+      }
+    };
+
+    loadLivePlaces();
 
     const eventsData = localStorage.getItem("events");
     if (eventsData) {
@@ -159,13 +165,7 @@ export default function Dashboard() {
         {stats.map((stat, i) => (
           <div
             key={i}
-            className="glass-panel"
-            style={{
-              padding: "24px",
-              borderRadius: "var(--radius-lg)",
-              transition: "transform var(--transition-fast), border-color var(--transition-fast)",
-              cursor: "pointer",
-            }}
+            className="kpi-card"
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = "translateY(-4px)";
               e.currentTarget.style.borderColor = stat.color;

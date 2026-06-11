@@ -1,0 +1,32 @@
+/* Accent tambahan dan kartu statistik */
+:root {
+  --accent-pink: #ec4899;
+  --accent-orange: #fb923c;
+}
+
+.stat-card {
+  background: rgba(21, 27, 44, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: var(--transition-fast), transform var(--transition-fast);
+  cursor: pointer;
+}
+.stat-card:hover {
+  transform: scale(1.03);
+  border-color: var(--accent-indigo);
+  box-shadow: var(--shadow-glow);
+}
+
+.stat-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-gradient);
+  color: #fff;
+}

@@ -107,6 +107,22 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid var(--border-color);
 }
 
+/* KPI Card Custom */
+.kpi-card {
+  background: var(--accent-gradient);
+  border-color: var(--accent-indigo);
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  transition: var(--transition-fast), transform var(--transition-fast);
+  cursor: pointer;
+}
+.kpi-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-indigo);
+  box-shadow: var(--shadow-glow);
+}
+
+
 /* Form inputs & elements */
 input, select, textarea {
   background-color: var(--bg-tertiary);
