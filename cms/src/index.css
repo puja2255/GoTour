@@ -109,8 +109,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* KPI Card Custom */
 .kpi-card {
-  background: var(--accent-gradient);
-  border-color: var(--accent-indigo);
+  background: var(--kpi-bg, var(--accent-gradient));
+  border: 1px solid var(--kpi-border, var(--border-color));
   padding: 24px;
   border-radius: var(--radius-lg);
   transition: var(--transition-fast), transform var(--transition-fast);
@@ -118,8 +118,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 .kpi-card:hover {
   transform: translateY(-4px);
-  border-color: var(--accent-indigo);
-  box-shadow: var(--shadow-glow);
+  border-color: var(--kpi-hover-border, var(--accent-indigo));
+  box-shadow: var(--kpi-hover-shadow, var(--shadow-glow));
 }
 
 
