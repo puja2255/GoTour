@@ -62,6 +62,10 @@ export default function Dashboard() {
       trend: "+3.2%",
       trendUp: true,
       color: "var(--accent-blue)",
+      bg: "linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(59, 130, 246, 0.02) 100%)",
+      border: "rgba(59, 130, 246, 0.2)",
+      hoverBorder: "rgba(59, 130, 246, 0.6)",
+      hoverShadow: "0 0 20px rgba(59, 130, 246, 0.3)",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
@@ -75,6 +79,10 @@ export default function Dashboard() {
       trend: "+12.4%",
       trendUp: true,
       color: "var(--accent-purple)",
+      bg: "linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(139, 92, 246, 0.02) 100%)",
+      border: "rgba(139, 92, 246, 0.2)",
+      hoverBorder: "rgba(139, 92, 246, 0.6)",
+      hoverShadow: "0 0 20px rgba(139, 92, 246, 0.3)",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-purple)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -90,6 +98,10 @@ export default function Dashboard() {
       trend: "+8.7%",
       trendUp: true,
       color: "var(--accent-cyan)",
+      bg: "linear-gradient(135deg, rgba(6, 182, 212, 0.12) 0%, rgba(6, 182, 212, 0.02) 100%)",
+      border: "rgba(6, 182, 212, 0.2)",
+      hoverBorder: "rgba(6, 182, 212, 0.6)",
+      hoverShadow: "0 0 20px rgba(6, 182, 212, 0.3)",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -105,6 +117,10 @@ export default function Dashboard() {
       trend: "+0.2",
       trendUp: true,
       color: "var(--status-warning)",
+      bg: "linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(245, 158, 11, 0.02) 100%)",
+      border: "rgba(245, 158, 11, 0.2)",
+      hoverBorder: "rgba(245, 158, 11, 0.6)",
+      hoverShadow: "0 0 20px rgba(245, 158, 11, 0.3)",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--status-warning)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
@@ -166,13 +182,11 @@ export default function Dashboard() {
           <div
             key={i}
             className="kpi-card"
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-4px)";
-              e.currentTarget.style.borderColor = stat.color;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.borderColor = "var(--border-color)";
+            style={{
+              ["--kpi-bg" as any]: stat.bg,
+              ["--kpi-border" as any]: stat.border,
+              ["--kpi-hover-border" as any]: stat.hoverBorder,
+              ["--kpi-hover-shadow" as any]: stat.hoverShadow,
             }}
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px" }}>

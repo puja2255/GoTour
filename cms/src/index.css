@@ -314,3 +314,15 @@ input::placeholder {
   color: var(--status-info);
   border: 1px solid rgba(6, 182, 212, 0.2);
 }
+
+.badge-purple {
+  background-color: rgba(139, 92, 246, 0.1);
+  color: var(--accent-purple);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.badge-primary {
+  background-color: rgba(79, 70, 229, 0.1);
+  color: var(--accent-indigo);
+  border: 1px solid rgba(79, 70, 229, 0.2);
+}
