@@ -39,6 +39,20 @@ export default function Events() {
   const [search, setSearch] = useState("");
   const [selectedStatus, setSelectedStatus] = useState<string>("Semua");
 
+  const formatDateIndo = (dateStr: string) => {
+    try {
+      const dateObj = new Date(dateStr);
+      if (isNaN(dateObj.getTime())) return dateStr;
+      return dateObj.toLocaleDateString("id-ID", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
+    } catch (e) {
+      return dateStr;
+    }
+  };
+
   // Modal forms
   const [showModal, setShowModal] = useState(false);
   const [editId, setEditId] = useState<number | null>(null);
@@ -357,7 +371,7 @@ export default function Events() {
                         <line x1="16" y1="2" x2="16" y2="6"></line>
                         <line x1="8" y1="2" x2="8" y2="6"></line>
                       </svg>
-                      {ev.date}
+                      {formatDateIndo(ev.date)}
                     </span>
                     <span style={{ display: "flex", alignItems: "center", gap: "4px", fontSize: "0.78rem", color: "var(--text-muted)" }}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" strokeWidth="2">
