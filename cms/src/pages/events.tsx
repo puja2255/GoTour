@@ -53,17 +53,6 @@ export default function Events() {
     }
   };
 
-  // Modal forms
-  const [showModal, setShowModal] = useState(false);
-  const [editId, setEditId] = useState<number | null>(null);
-  const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
-  const [date, setDate] = useState("");
-  const [price, setPrice] = useState("");
-  const [status, setStatus] = useState<"Akan Datang" | "Berlangsung" | "Selesai">("Akan Datang");
-  const [image, setImage] = useState("");
-  const [description, setDescription] = useState("");
-
   // Load events
   useEffect(() => {
     const data = localStorage.getItem("events");
@@ -78,85 +67,6 @@ export default function Events() {
       setEvents(initial);
     }
   }, []);
-
-  const saveToLocalStorage = (updatedEvents: TravelEvent[]) => {
-    localStorage.setItem("events", JSON.stringify(updatedEvents));
-    setEvents(updatedEvents);
-  };
-
-  const openAddModal = () => {
-    setEditId(null);
-    setName("");
-    setLocation("");
-    setDate("");
-    setPrice("");
-    setStatus("Akan Datang");
-    setImage("");
-    setDescription("");
-    setShowModal(true);
-  };
-
-  const openEditModal = (ev: TravelEvent) => {
-    setEditId(ev.id);
-    setName(ev.name);
-    setLocation(ev.location);
-    setDate(ev.date);
-    setPrice(ev.price);
-    setStatus(ev.status);
-    setImage(ev.image);
-    setDescription(ev.description);
-    setShowModal(true);
-  };
-
-  const deleteEvent = (id: number) => {
-    if (window.confirm("Apakah Anda yakin ingin menghapus event ini?")) {
-      const filtered = events.filter((ev) => ev.id !== id);
-      saveToLocalStorage(filtered);
-    }
-  };
-
-  const handleSave = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name || !location || !date || !price) {
-      alert("Mohon isi field penting (Nama, Lokasi, Tanggal, Harga)!");
-      return;
-    }
-
-    const fallbackImage = image.trim() || "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80";
-
-    if (editId) {
-      // Edit
-      const updated = events.map((ev) =>
-        ev.id === editId
-          ? {
-              ...ev,
-              name,
-              location,
-              date,
-              price,
-              status,
-              image: fallbackImage,
-              description,
-            }
-          : ev
-      );
-      saveToLocalStorage(updated);
-    } else {
-      // Add
-      const newEvent: TravelEvent = {
-        id: Date.now(),
-        name,
-        location,
-        date,
-        price,
-        status,
-        image: fallbackImage,
-        description,
-      };
-      saveToLocalStorage([...events, newEvent]);
-    }
-    setShowModal(false);
-  };
 
   // Filter
   const filteredEvents = events.filter((ev) => {
@@ -189,11 +99,11 @@ export default function Events() {
       <div style={{ display: "flex", justifySelf: "normal", justifyContent: "space-between", alignItems: "center" }}>
         <div>
           <h2 style={{ fontSize: "1.6rem", fontWeight: 700, color: "#fff", marginBottom: "4px" }}>
-            Kelola Event Pariwisata
-          </h2>
-          <p style={{ color: "var(--text-muted)", fontSize: "0.88rem" }}>
-            Kelola festival, perayaan, konser, dan acara seru yang terintegrasi dengan paket destinasi GoTour.
-          </p>
+          Info Event Pariwisata
+        </h2>
+        <p style={{ color: "var(--text-muted)", fontSize: "0.88rem" }}>
+          Lihat informasi event pariwisata yang tersedia.
+        </p>
         </div>
         
       </div>
@@ -407,188 +317,6 @@ export default function Events() {
               </div>
             </div>
           ))}
-        </div>
-      )}
-
-      {/* Floating Overlay Modal Form for Event CRUD */}
-      {showModal && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            backgroundColor: "rgba(0,0,0,0.6)",
-            backdropFilter: "blur(4px)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 1000,
-          }}
-          className="animate-fade-in"
-        >
-          <div
-            className="glass-panel animate-scale"
-            style={{
-              width: "100%",
-              maxWidth: "580px",
-              borderRadius: "var(--radius-lg)",
-              overflow: "hidden",
-              boxShadow: "var(--shadow-lg)",
-              border: "1px solid rgba(255,255,255,0.12)",
-              maxHeight: "90vh",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            {/* Modal Header */}
-            <div
-              style={{
-                padding: "20px 24px",
-                borderBottom: "1px solid var(--border-color)",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                background: "rgba(255,255,255,0.02)",
-              }}
-            >
-              <h3 style={{ color: "#fff", fontSize: "1.2rem", fontWeight: 700 }}>
-                {editId ? "Ubah Event Wisata" : "Tambah Event Wisata"}
-              </h3>
-              <button
-                onClick={() => setShowModal(false)}
-                style={{
-                  background: "transparent",
-                  border: "none",
-                  color: "var(--text-muted)",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "4px",
-                  borderRadius: "50%",
-                  transition: "var(--transition-fast)",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
-            </div>
-
-            {/* Modal Body Form */}
-            <form onSubmit={handleSave} style={{ flex: 1, overflowY: "auto", padding: "24px" }}>
-              <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
-                {/* Event Name */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-muted)" }}>Nama Event</label>
-                  <input
-                    type="text"
-                    placeholder="Contoh: Jazz Gunung Bromo 2026"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
-                </div>
-
-                {/* Location & Date (Two columns) */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                    <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-muted)" }}>Lokasi Event</label>
-                    <input
-                      type="text"
-                      placeholder="Contoh: Probolinggo, Jatim"
-                      value={location}
-                      onChange={(e) => setLocation(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                    <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-muted)" }}>Tanggal Pelaksanaan</label>
-                    <input
-                      type="date"
-                      value={date}
-                      onChange={(e) => setDate(e.target.value)}
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* Price & Status (Two columns) */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                    <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-muted)" }}>Harga Tiket / Tiket Masuk</label>
-                    <input
-                      type="text"
-                      placeholder="Contoh: Gratis ATAU Rp 250.000"
-                      value={price}
-                      onChange={(e) => setPrice(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                    <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-muted)" }}>Status</label>
-                    <select
-                      value={status}
-                      onChange={(e) => setStatus(e.target.value as TravelEvent["status"])}
-                    >
-                      {STATUSES.map((st) => (
-                        <option key={st} value={st}>
-                          {st}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                {/* Image URL */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-muted)" }}>URL Poster / Gambar Event</label>
-                  <input
-                    type="url"
-                    placeholder="https://example.com/poster.jpg (Kosongkan untuk default)"
-                    value={image}
-                    onChange={(e) => setImage(e.target.value)}
-                  />
-                </div>
-
-                {/* Description */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-muted)" }}>Deskripsi Ringkas</label>
-                  <textarea
-                    rows={3}
-                    placeholder="Tulis ringkasan penjelasan detail event..."
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    style={{ resize: "vertical" }}
-                  />
-                </div>
-              </div>
-
-              {/* Action Buttons Footer */}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  gap: "12px",
-                  marginTop: "30px",
-                  borderTop: "1px solid var(--border-color)",
-                  paddingTop: "20px",
-                }}
-              >
-                <button type="button" className="btn-secondary" onClick={() => setShowModal(false)}>
-                  Batalkan
-                </button>
-                <button type="submit" className="btn-primary">
-                  {editId ? "Simpan Perubahan" : "Tambahkan Event"}
-                </button>
-              </div>
-            </form>
-          </div>
         </div>
       )}
     </div>

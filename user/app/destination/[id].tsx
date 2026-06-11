@@ -23,22 +23,13 @@ export default function DetailPage() {
   const location = params.location || 'Indonesia';
   const category = params.category || 'Destinasi Unggulan';
   const rating = params.rating ? Number(params.rating) : 4.8;
-  const image = params.image || 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80';
+  const image = typeof params.image === 'string'
+    ? params.image
+    : Array.isArray(params.image)
+      ? params.image[0]
+      : 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80';
   const description = params.description || 'Destinasi liburan eksotis dengan panorama keindahan alam nusantara yang asri dan memanjakan mata, sangat cocok untuk mengisi waktu liburan Anda bersama keluarga.';
 
-  const handleBooking = () => {
-    Alert.alert(
-      'Pemesanan Tiket 🎟️',
-      `Apakah Anda ingin melanjutkan pemesanan tiket untuk destinasi "${name}"?`,
-      [
-        { text: 'Batal', style: 'cancel' },
-        {
-          text: 'Pesan Sekarang',
-          onPress: () => Alert.alert('Sukses 🎉', 'Tiket Anda telah berhasil dipesan! Kode booking telah dikirim ke email Anda.'),
-        },
-      ]
-    );
-  };
 
   return (
     <View style={styles.container}>
@@ -143,13 +134,6 @@ export default function DetailPage() {
           <Text style={styles.priceLabel}>Mulai Dari</Text>
           <Text style={styles.priceValue}>Rp 250.000<Text style={styles.perPerson}>/pax</Text></Text>
         </View>
-        <TouchableOpacity
-          style={styles.bookButton}
-          activeOpacity={0.8}
-          onPress={handleBooking}
-        >
-          <Text style={styles.bookButtonText}>Pesan Tiket</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );
