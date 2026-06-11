@@ -52,6 +52,21 @@ export default function Places() {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Semua");
 
+  const getCategoryBadge = (cat: string) => {
+    const name = cat.toLowerCase();
+    if (name.includes("candi") || name.includes("sejarah")) {
+      return <span className="badge badge-warning">{cat}</span>;
+    } else if (name.includes("pantai") || name.includes("bahari") || name.includes("laut")) {
+      return <span className="badge badge-info">{cat}</span>;
+    } else if (name.includes("gunung") || name.includes("alam") || name.includes("hiking")) {
+      return <span className="badge badge-success">{cat}</span>;
+    } else if (name.includes("seni") || name.includes("kuliner") || name.includes("nusantara")) {
+      return <span className="badge badge-purple">{cat}</span>;
+    } else {
+      return <span className="badge badge-primary">{cat}</span>;
+    }
+  };
+
   // Modal form states
   const [showModal, setShowModal] = useState(false);
   const [editId, setEditId] = useState<number | null>(null);
@@ -408,7 +423,7 @@ export default function Places() {
                     </div>
                   </td>
                   <td>
-                    <span className="badge badge-info">{p.category}</span>
+                    {getCategoryBadge(p.category)}
                   </td>
                   <td>
                     <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "0.88rem" }}>
