@@ -4,13 +4,10 @@ import { AuthController } from './auth.controller';
 import { PrismaService } from '../prisma/prisma.service';
 import { JwtModule } from '@nestjs/jwt';
 
-
 @Module({
   imports: [
     JwtModule.register({
-      secret:
-        process.env.JWT_SECRET ||
-        'gotour-secret',
+      secret: process.env.JWT_SECRET || 'gotour-secret',
 
       signOptions: {
         expiresIn: '7d',
@@ -18,14 +15,8 @@ import { JwtModule } from '@nestjs/jwt';
     }),
   ],
 
-   controllers: [
-    AuthController,
-  ],
+  controllers: [AuthController],
 
-  providers: [
-    AuthService,
-    PrismaService,
-  ],
+  providers: [AuthService, PrismaService],
 })
-
 export class AuthModule {}
