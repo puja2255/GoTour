@@ -5,9 +5,9 @@ import { Param } from '@nestjs/common';
 
 @Controller('tour')
 export class TourController {
-    constructor(private readonly service: TourService) {}
+  constructor(private readonly service: TourService) {}
 
-     @Post()
+  @Post()
   create(@Body() dto: CreateTourDto) {
     return this.service.create(dto);
   }
@@ -15,5 +15,10 @@ export class TourController {
   @Get()
   findAll() {
     return this.service.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.service.findOne(Number(id));
   }
 }
