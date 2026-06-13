@@ -11,4 +11,11 @@ export class TourService {
   findAll() {
     return prisma.tour.findMany({ include: { category: true } });
   }
+
+  findOne(id: number) {
+  return prisma.tour.findUnique({
+    where: { id },
+    include: { category: true },
+  });
 }
+
