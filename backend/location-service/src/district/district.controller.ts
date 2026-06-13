@@ -11,3 +11,14 @@ export class DistrictController {
   constructor(
     private readonly service: DistrictService,
   ) {}
+
+  @Post()
+  create(
+    @Body()
+    body: {
+      name: string;
+      cityId: number;
+    },
+  ) {
+    return this.service.create(body);
+  }
