@@ -22,4 +22,7 @@ export class JwtGuard implements CanActivate {
       if (!authHeader) {
       throw new UnauthorizedException();
     }
+
+    const token =
+      authHeader.split(' ')[1];
   )
