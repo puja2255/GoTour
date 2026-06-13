@@ -8,6 +8,13 @@ export class TourService {
     return prisma.tour.create({ data });
   }
 
+  update(id: number, data: any) {
+  return prisma.tour.update({
+    where: { id },
+    data,
+  });
+}
+
   findAll() {
     return prisma.tour.findMany({ include: { category: true } });
   }
