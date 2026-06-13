@@ -22,4 +22,9 @@ export class TourController {
   findOne(@Param('id') id: string) {
     return this.service.findOne(Number(id));
   }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() dto: CreateTourDto) {
+    return this.service.update(Number(id), dto);
+  }
 }
