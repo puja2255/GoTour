@@ -11,3 +11,7 @@ export class JwtGuard implements CanActivate {
   constructor(
     private jwtService: JwtService,
   ) {}
+
+  canActivate(
+    
+  )
