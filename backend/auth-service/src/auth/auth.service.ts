@@ -18,3 +18,9 @@ export class AuthService {
         email: dto.email,
       },
     });
+
+     if (existing) {
+      throw new BadRequestException(
+        'Email already exists',
+      );
+    }
