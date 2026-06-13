@@ -11,3 +11,10 @@ export class AuthService {
     private prisma: PrismaService,
     private jwtService: JwtService,
   ) {}
+
+  async register(dto: RegisterDto) {
+    const existing = await this.prisma.user.findUnique({
+      where: {
+        email: dto.email,
+      },
+    });
