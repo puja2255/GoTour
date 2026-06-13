@@ -56,3 +56,9 @@ export class AuthService {
         dto.password,
         user.password,
       );
+
+      if (!validPassword) {
+      throw new BadRequestException(
+        'Wrong password',
+      );
+    }
