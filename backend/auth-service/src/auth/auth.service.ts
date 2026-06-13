@@ -44,3 +44,15 @@ export class AuthService {
           email: dto.email,
         },
       });
+
+       if (!user) {
+      throw new BadRequestException(
+        'User not found',
+      );
+    }
+
+    const validPassword =
+      await bcrypt.compare(
+        dto.password,
+        user.password,
+      );
