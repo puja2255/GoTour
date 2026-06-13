@@ -14,3 +14,12 @@ export class CityService {
       data,
     });
   }
+
+   findAll() {
+    return this.prisma.city.findMany({
+      include: {
+        province: true,
+      },
+    });
+  }
+}
