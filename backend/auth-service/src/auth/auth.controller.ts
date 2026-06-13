@@ -12,3 +12,10 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
   ) {}
+
+   @Post('register')
+  register(
+    @Body() dto: RegisterDto,
+  ) {
+    return this.authService.register(dto);
+  }
