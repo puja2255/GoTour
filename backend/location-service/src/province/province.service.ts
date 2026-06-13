@@ -5,3 +5,9 @@ export class ProvinceService {
   constructor(
     private prisma: PrismaService,
   ) {}
+
+    create(data: { name: string }) {
+    return this.prisma.province.create({
+      data,
+    });
+  }
