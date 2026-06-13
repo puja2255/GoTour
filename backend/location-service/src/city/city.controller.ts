@@ -1,16 +1,9 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 
 import { CityService } from './city.service';
 @Controller('city')
 export class CityController {
-  constructor(
-    private readonly service: CityService,
-  ) {}
+  constructor(private readonly service: CityService) {}
 
   @Post()
   create(
@@ -23,7 +16,7 @@ export class CityController {
     return this.service.create(body);
   }
 
-   @Get()
+  @Get()
   findAll() {
     return this.service.findAll();
   }
