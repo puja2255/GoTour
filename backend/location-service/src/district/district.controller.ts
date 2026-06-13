@@ -7,4 +7,7 @@ import {
 
 import { DistrictService } from './district.service';
 @Controller('district')
-export class DistrictController {}
+export class DistrictController {
+  constructor(
+    private readonly service: DistrictService,
+  ) {}
