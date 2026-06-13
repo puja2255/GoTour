@@ -24,3 +24,6 @@ export class AuthService {
         'Email already exists',
       );
     }
+
+     const hashedPassword =
+      await bcrypt.hash(dto.password, 10);
