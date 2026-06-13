@@ -22,3 +22,9 @@ export class DistrictController {
   ) {
     return this.service.create(body);
   }
+
+    @Get()
+  findAll() {
+    return this.service.findAll();
+  }
+}
