@@ -25,4 +25,8 @@ export class JwtGuard implements CanActivate {
 
     const token =
       authHeader.split(' ')[1];
+
+        try {
+      const payload =
+        this.jwtService.verify(token);
   )
