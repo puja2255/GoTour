@@ -17,4 +17,10 @@ export class AuthController {
   login(@Body() dto: LoginDto) {
     return this.authService.login(dto);
   }
+
+  @Get('profile')
+@UseGuards(JwtGuard)
+profile(@Req() req) {
+  return req.user;
+}
 }
