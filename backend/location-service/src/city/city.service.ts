@@ -5,3 +5,12 @@ export class CityService {
   constructor(
     private readonly prisma: PrismaService,
   ) {}
+
+  create(data: {
+    name: string;
+    provinceId: number;
+  }) {
+    return this.prisma.city.create({
+      data,
+    });
+  }
