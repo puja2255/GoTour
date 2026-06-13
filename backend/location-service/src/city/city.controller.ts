@@ -7,4 +7,7 @@ import {
 
 import { CityService } from './city.service';
 @Controller('city')
-export class CityController {}
+export class CityController {
+  constructor(
+    private readonly service: CityService,
+  ) {}
