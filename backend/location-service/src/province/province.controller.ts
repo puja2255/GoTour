@@ -4,7 +4,7 @@ import { ProvinceService } from './province.service';
 @Controller('province')
 export class ProvinceController {}
 @Controller('province')
-export class ProvinceController {
+export class provinceController {
   constructor(private readonly service: ProvinceService) {}
 
   @Post()
