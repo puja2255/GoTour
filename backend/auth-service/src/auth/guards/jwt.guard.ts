@@ -17,4 +17,6 @@ export class JwtGuard implements CanActivate {
   ): boolean {
     const request =
       context.switchToHttp().getRequest();
+      const authHeader =
+      request.headers.authorization;
   )
