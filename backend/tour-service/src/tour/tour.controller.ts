@@ -3,6 +3,8 @@ import { TourService } from './tour.service';
 import { CreateTourDto } from './dto/create-tour.dto';
 import { Param } from '@nestjs/common';
 import { Patch } from '@nestjs/common';
+import { Delete } from '@nestjs/common';
+
 
 @Controller('tour')
 export class TourController {
