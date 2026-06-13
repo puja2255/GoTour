@@ -11,3 +11,14 @@ export class CityController {
   constructor(
     private readonly service: CityService,
   ) {}
+
+  @Post()
+  create(
+    @Body()
+    body: {
+      name: string;
+      provinceId: number;
+    },
+  ) {
+    return this.service.create(body);
+  }
