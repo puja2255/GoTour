@@ -11,3 +11,8 @@ export class ProvinceService {
       data,
     });
   }
+
+    findAll() {
+    return this.prisma.province.findMany();
+  }
+}
