@@ -62,3 +62,15 @@ export class AuthService {
         'Wrong password',
       );
     }
+
+    const token = this.jwtService.sign({
+      sub: user.id,
+      email: user.email,
+      role: user.role,
+    });
+
+    return {
+      access_token: token,
+    };
+  }
+}
