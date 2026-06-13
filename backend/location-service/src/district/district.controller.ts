@@ -20,4 +20,14 @@ export class DistrictController {
   findAll() {
     return this.service.findAll();
   }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() body) {
+    return this.service.update(Number(id), body);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.service.remove(Number(id));
+  }
 }
