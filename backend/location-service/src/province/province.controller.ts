@@ -21,3 +21,9 @@ export class ProvinceController {
     return this.service.create(body);
   }
 
+   @Get()
+  findAll() {
+    return this.service.findAll();
+  }
+}
+
