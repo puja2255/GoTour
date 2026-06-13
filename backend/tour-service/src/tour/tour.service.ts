@@ -8,6 +8,12 @@ export class TourService {
     return prisma.tour.create({ data });
   }
 
+  remove(id: number) {
+  return prisma.tour.delete({
+    where: { id },
+  });
+}
+
   update(id: number, data: any) {
   return prisma.tour.update({
     where: { id },
@@ -25,4 +31,3 @@ export class TourService {
     include: { category: true },
   });
 }
-
