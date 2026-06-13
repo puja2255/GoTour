@@ -17,4 +17,17 @@ export class CityService {
       },
     });
   }
+
+  update(id: number, data) {
+    return this.prisma.city.update({
+      where: { id },
+      data,
+    });
+  }
+
+  remove(id: number) {
+    return this.prisma.city.delete({
+      where: { id },
+    });
+  }
 }
