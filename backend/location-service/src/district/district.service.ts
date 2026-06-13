@@ -5,3 +5,12 @@ export class DistrictService {
   constructor(
     private readonly prisma: PrismaService,
   ) {}
+
+   create(data: {
+    name: string;
+    cityId: number;
+  }) {
+    return this.prisma.district.create({
+      data,
+    });
+  }
