@@ -17,4 +17,17 @@ export class DistrictService {
       },
     });
   }
+
+  update(id: number, data) {
+    return this.prisma.district.update({
+      where: { id },
+      data,
+    });
+  }
+
+  remove(id: number) {
+    return this.prisma.district.delete({
+      where: { id },
+    });
+  }
 }
