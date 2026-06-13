@@ -5,7 +5,6 @@ import { Param } from '@nestjs/common';
 import { Patch } from '@nestjs/common';
 import { Delete } from '@nestjs/common';
 
-
 @Controller('tour')
 export class TourController {
   constructor(private readonly service: TourService) {}
@@ -28,5 +27,10 @@ export class TourController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() dto: CreateTourDto) {
     return this.service.update(Number(id), dto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.service.remove(Number(id));
   }
 }
