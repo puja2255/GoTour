@@ -6,6 +6,9 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Module({
   controllers: [ProvinceController],
-  providers: [ProvinceService]
+  providers: [
+    ProvinceService,
+    PrismaService,
+  ],
 })
 export class ProvinceModule {}
