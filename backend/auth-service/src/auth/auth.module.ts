@@ -27,3 +27,5 @@ import { JwtModule } from '@nestjs/jwt';
     PrismaService,
   ],
 })
+
+export class AuthModule {}
