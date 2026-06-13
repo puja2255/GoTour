@@ -14,3 +14,10 @@ export class ProvinceController {
     private readonly service: ProvinceService,
   ) {}
 
+  @Post()
+  create(
+    @Body() body: { name: string },
+  ) {
+    return this.service.create(body);
+  }
+
