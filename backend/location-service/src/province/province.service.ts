@@ -13,4 +13,17 @@ export class ProvinceService {
   findAll() {
     return this.prisma.province.findMany();
   }
+
+  update(id: number, data: { name: string }) {
+    return this.prisma.province.update({
+      where: { id },
+      data,
+    });
+  }
+
+  remove(id: number) {
+    return this.prisma.province.delete({
+      where: { id },
+    });
+  }
 }
