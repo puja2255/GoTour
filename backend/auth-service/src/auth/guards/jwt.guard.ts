@@ -31,4 +31,10 @@ export class JwtGuard implements CanActivate {
         this.jwtService.verify(token);
 
          request.user = payload;
+
+         return true;
+    } catch {
+      throw new UnauthorizedException();
+    }
+  }
   )
