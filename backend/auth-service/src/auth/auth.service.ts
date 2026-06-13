@@ -19,16 +19,13 @@ export class AuthService {
       },
     });
 
-     if (existing) {
-      throw new BadRequestException(
-        'Email already exists',
-      );
+    if (existing) {
+      throw new BadRequestException('Email already exists');
     }
 
-     const hashedPassword =
-      await bcrypt.hash(dto.password, 10);
+    const hashedPassword = await bcrypt.hash(dto.password, 10);
 
-      return this.prisma.user.create({
+    return this.prisma.user.create({
       data: {
         email: dto.email,
         password: hashedPassword,
@@ -38,29 +35,20 @@ export class AuthService {
   }
 
   async login(dto: LoginDto) {
-    const user =
-      await this.prisma.user.findUnique({
-        where: {
-          email: dto.email,
-        },
-      });
+    const user = await this.prisma.user.findUnique({
+      where: {
+        email: dto.email,
+      },
+    });
 
-       if (!user) {
-      throw new BadRequestException(
-        'User not found',
-      );
+    if (!user) {
+      throw new BadRequestException('User not found');
     }
 
-    const validPassword =
-      await bcrypt.compare(
-        dto.password,
-        user.password,
-      );
+    const validPassword = await bcrypt.compare(dto.password, user.password);
 
-      if (!validPassword) {
-      throw new BadRequestException(
-        'Wrong password',
-      );
+    if (!validPassword) {
+      throw new BadRequestException('Wrong password');
     }
 
     const token = this.jwtService.sign({
