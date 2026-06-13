@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { TourService } from './tour.service';
 import { CreateTourDto } from './dto/create-tour.dto';
+import { Param } from '@nestjs/common';
 
 @Controller('tour')
 export class TourController {
