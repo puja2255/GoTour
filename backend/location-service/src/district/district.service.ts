@@ -14,3 +14,12 @@ export class DistrictService {
       data,
     });
   }
+
+  findAll() {
+    return this.prisma.district.findMany({
+      include: {
+        city: true,
+      },
+    });
+  }
+}
